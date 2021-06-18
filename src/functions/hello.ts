@@ -1,11 +1,13 @@
-export const handle = async (event) => {
+import { APIGatewayProxyHandler } from "aws-lambda";
+
+export const handle: APIGatewayProxyHandler = async (event) => {
   return {
-    statusCode: 201,
+    statusCode: 200,
     body: JSON.stringify({
-      message: "it's alive",
+      message: "test",
     }),
     headers: {
-      "content-type": "application/json",
+      contentType: "application/json",
     },
   };
 };

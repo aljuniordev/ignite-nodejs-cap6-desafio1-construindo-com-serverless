@@ -1,14 +1,18 @@
 {
   "name": "ignite-nodejs-cap6-desafio1-construindo-com-serverless",
   "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "dev": "serverless offline",
+    "dynamo:start": "serverless dynamodb start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@middy/core": "^1.5.2",
     "@middy/http-json-body-parser": "^1.5.2",
-    "source-map-support": "^0.5.19"
+    "aws-sdk": "^2.931.0",
+    "dotenv": "^10.0.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@serverless/typescript": "^2.23.0",
@@ -16,6 +20,7 @@
     "@types/node": "^14.14.25",
     "json-schema-to-ts": "^1.5.0",
     "serverless": "^2.23.0",
+    "serverless-bundle": "^4.3.1",
     "serverless-dynamodb-local": "^0.2.39",
     "serverless-offline": "^7.0.0",
     "serverless-webpack": "^5.3.5",

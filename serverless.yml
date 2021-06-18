@@ -1,10 +1,9 @@
-service:
-  name: ignite-cap6-desafio1-serverless
+service: ignite-cap6-desafio1-serverless
 
 plugins:
-  - serverless-offline
   - serverless-webpack
   - serverless-dynamodb-local
+  - serverless-offline
 
 custom:
   webpack:
@@ -21,14 +20,33 @@ custom:
 
 provider:
   name: aws
+  region: us-east-1
+  runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
+  apiGateway:
+    shouldStartNameWithService: true
 
 functions:
   hello:
     handler: src/functions/hello.handle
     events:
       - http:
-          path: /hello
-          method: GET
+          path: hello
+          method: get
+          cors: true
+  taskCreate:
+    handler: src/functions/taskCreate.handle
+    events:
+      - http:
+          path: todos/{id}
+          method: post
+          cors: true
+  taskGetByUserId:
+    handler: src/functions/taskGetByUserId.handle
+    events:
+      - http:
+          path: todos/{id}
+          method: get
           cors: true
 
 resources:
@@ -36,7 +54,7 @@ resources:
     dbIgniteDesafioServerless:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: users
+        TableName: tasks
         ProvisionedThroughput:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
